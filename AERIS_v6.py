@@ -103,14 +103,15 @@ while(True):
     data = x.decode("utf-8")
     data_list = data.split(',')
     #print(data_list[2])
-    print(data_list)
+    #print(data_list)
     if (len(data_list) > 10):
         out_string = [local + data_list]
         to_count = 0;
-        CH4 = data_list[31]
-        C2H6 = data_list[34]
-        AERIS_P = data_list[3]
+        CH4 = data_list[30][0:4]
+        C2H6 = data_list[33][0:4]
+        AERIS_P = data_list[3][0:4]
         AERIS_T = data_list[8]
+        AERIS_H2O = data_list[31]
     else:
         to_count = to_count + 1
         out_string = [local + miss_str]
@@ -119,6 +120,7 @@ while(True):
         C2H6 = '---'
         AERIS_P = '---'
         AERIS_T = '---'
+        AERIS_H2O = '---'
         if (to_count == 60):
             to_count = 0
             print("reset serial port...")
@@ -142,7 +144,7 @@ while(True):
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
     draw.text((0, 0), ''.join(['Site: ',site,'  ',t]), font=fnt, fill=255)
     draw.text((0, 11), ''.join(['CH4=',CH4,',  C2H6=',C2H6]) , font=fnt, fill=255)
-    draw.text((0, 22), ''.join(['P=',AERIS_P,',  T=',AERIS_T, ', ',s]) , font=fnt, fill=255)
+    draw.text((0, 21), ''.join(['P=',AERIS_P,',  H2O=',AERIS_H2O]) , font=fnt, fill=255)
     #print(''.join(['Site: ',site]))
     disp.image(image)
     disp.show()
